@@ -38,7 +38,10 @@ export function App() {
         setContacts(prevContacts => {
             let isNameRepeat = false;
             prevContacts.map(prevContact => {
-                if (contact.name === prevContact.name) {
+                if (
+                    contact.name.toLowerCase() ===
+                    prevContact.name.toLowerCase()
+                ) {
                     alert(`${contact.name} is already in contacts.`);
                     isNameRepeat = true;
                 }
