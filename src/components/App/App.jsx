@@ -8,19 +8,13 @@ import { Container } from 'components/App/App.styled';
 const contactsStorageName = 'contacts';
 
 export function App() {
-    const [contacts, setContacts] = useState([]);
+    const [contacts, setContacts] = useState(() => {
+        const contactsFromStorage = localStorage.getItem(contactsStorageName);
+        return contactsFromStorage ? JSON.parse(contactsFromStorage) : [];
+    });
     const [filter, setFilter] = useState('');
 
     let isFirstUpdate = useRef(true);
-
-    useEffect(() => {
-        const contactsFromStorage = localStorage.getItem(contactsStorageName);
-
-        if (contactsFromStorage) {
-            const parsedContacts = JSON.parse(contactsFromStorage);
-            setContacts(parsedContacts);
-        }
-    }, []);
 
     useEffect(() => {
         if (isFirstUpdate.current) {
